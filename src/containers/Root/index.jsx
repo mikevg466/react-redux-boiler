@@ -30,7 +30,11 @@ export const mapStateToProps = state => ({
   greeting: state.user.greeting,
 });
 
+export const mapDispatchToProps = {
+  setName,
+};
+
 export default connect(
   mapStateToProps,
-  { setName }
+  mapDispatchToProps
 )(RootContainer);

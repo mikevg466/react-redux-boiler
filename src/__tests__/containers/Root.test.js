@@ -1,6 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { RootContainer, mapStateToProps } from '../../containers/Root';
+import {
+  RootContainer,
+  mapStateToProps,
+  mapDispatchToProps,
+} from '../../containers/Root';
 import { userInitialState } from '../../reducers/user';
 
 const mockState = {
@@ -32,5 +36,11 @@ describe('Root Container', () => {
       };
       expect(mapStateToProps(mockStore)).toEqual(expectedState);
     });
+  });
+
+  describe('mapDispatchToProps', () => {
+    expect(Object.keys(mapDispatchToProps)).toEqual(
+      Object.keys(mockDispatchers)
+    );
   });
 });
