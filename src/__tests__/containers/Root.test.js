@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { RootContainer, mapStateToProps } from '../../containers/Root';
-import { initialUserState } from '../../reducers/user';
+import { userInitialState } from '../../reducers/user';
 
 const mockState = {
-  greeting: initialUserState.greeting,
-  name: initialUserState.name,
+  greeting: userInitialState.greeting,
+  name: userInitialState.name,
 };
 const mockDispatchers = {
   setName: jest.fn(),
@@ -24,11 +24,11 @@ describe('Root Container', () => {
   describe('mapStateToProps', () => {
     it('outputs the expected state when passed a mock store', () => {
       const mockStore = {
-        user: initialUserState,
+        user: userInitialState,
       };
       const expectedState = {
-        greeting: initialUserState.greeting,
-        name: initialUserState.name,
+        greeting: userInitialState.greeting,
+        name: userInitialState.name,
       };
       expect(mapStateToProps(mockStore)).toEqual(expectedState);
     });

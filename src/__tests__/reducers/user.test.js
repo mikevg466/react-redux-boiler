@@ -1,13 +1,13 @@
-import userReducer, { initialUserState } from '../../reducers/user';
+import userReducer, { userInitialState } from '../../reducers/user';
 import types from '../../actions/types';
 
 const getExpectedState = newState =>
-  Object.assign({}, initialUserState, newState);
+  Object.assign({}, userInitialState, newState);
 
 describe('User Reducer', () => {
   it('SET_NAME processes correctly', () => {
     const name = 'testName';
-    const result = userReducer(initialUserState, {
+    const result = userReducer(userInitialState, {
       type: types.SET_NAME,
       name,
     });
@@ -17,7 +17,7 @@ describe('User Reducer', () => {
 
   it('SET_GREETING processes correctly', () => {
     const greeting = 'testGreeting';
-    const result = userReducer(initialUserState, {
+    const result = userReducer(userInitialState, {
       type: types.SET_GREETING,
       greeting,
     });
