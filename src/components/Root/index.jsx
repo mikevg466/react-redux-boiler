@@ -1,33 +1,30 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import logo from '../../assets/images/logo.svg';
-import './Root.css';
+import './Root.scss';
 
 /**
  * Root React Component containing the presentational Root
  * @extends PureComponent
  */
-class RootComponent extends PureComponent {
+export default class RootComponent extends PureComponent {
   /**
    * React Render
    * @return {JSX}
    */
   render() {
-    const { greeting, name, actions } = this.props;
+    const { greeting, name, setName } = this.props;
     return (
-      <div className='Root'>
-        <header className='Root-header'>
-          <img alt='logo' className='Root-logo' src={logo} />
+      <div className='root'>
+        <header className='header'>
+          <img alt='logo' className='logo' src={logo} />
           <p>
             {`${greeting} `}
-            <input
-              onChange={e => actions.setName(e.target.value)}
-              value={name}
-            />
+            <input onChange={e => setName(e.target.value)} value={name} />
             {'!'}
           </p>
           <a
-            className='Root-link'
+            className='link'
             href='https://reactjs.org'
             rel='noopener noreferrer'
             target='_blank'
@@ -43,7 +40,5 @@ class RootComponent extends PureComponent {
 RootComponent.propTypes = {
   name: PropTypes.string,
   greeting: PropTypes.string,
-  actions: PropTypes.object,
+  setName: PropTypes.func.isRequired,
 };
-
-export default RootComponent;

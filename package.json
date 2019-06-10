@@ -6,6 +6,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
+    "node-sass": "^4.12.0",
     "path": "^0.12.7",
     "winston": "^3.2.1"
   },
@@ -33,6 +34,8 @@
     "*.{js,jsx}": "eslint"
   },
   "devDependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "eslint-config-google": "^0.12.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-jest": "^22.2.2",

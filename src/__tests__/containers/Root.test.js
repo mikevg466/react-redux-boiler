@@ -1,35 +1,36 @@
 import React from 'react';
-import render from 'react-test-renderer';
-import { bindActionCreators } from 'redux';
-import {
-  RootContainer,
-  mapStateToProps,
-  mapDispatchToProps,
-} from '../../containers/Root/Root';
-import { UserActions } from '../../actions';
-import mockStore from '../../__mocks__/initialStore';
+import { shallow } from 'enzyme';
+import { RootContainer, mapStateToProps } from '../../containers/Root';
+import { initialUserState } from '../../reducers/user';
 
-const mockDispatchers = bindActionCreators(UserActions, jest.fn());
+const mockState = {
+  greeting: initialUserState.greeting,
+  name: initialUserState.name,
+};
+const mockDispatchers = {
+  setName: jest.fn(),
+};
+const mockProps = {
+  ...mockState,
+  ...mockDispatchers,
+};
 
 describe('Root Container', () => {
   it('renders correctly', () => {
-    const tree = render.create(<RootContainer />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(<RootContainer {...mockProps} />);
+    expect(wrapper.debug()).toMatchSnapshot();
   });
 
   describe('mapStateToProps', () => {
     it('outputs the expected state when passed a mock store', () => {
-      expect(mapStateToProps(mockStore)).toEqual({
-        name: mockStore.user.name,
-        greeting: mockStore.user.greeting,
-      });
-    });
-  });
-
-  describe('mapDispatchToProps', () => {
-    const dispatchers = mapDispatchToProps(jest.fn());
-    Object.keys(mockDispatchers).forEach(key => {
-      expect(dispatchers.actions[key]).toEqual(expect.any(Function));
+      const mockStore = {
+        user: initialUserState,
+      };
+      const expectedState = {
+        greeting: initialUserState.greeting,
+        name: initialUserState.name,
+      };
+      expect(mapStateToProps(mockStore)).toEqual(expectedState);
     });
   });
 });

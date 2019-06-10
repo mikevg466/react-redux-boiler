@@ -1,22 +1,23 @@
 import React from 'react';
-import render from 'react-test-renderer';
-import { bindActionCreators } from 'redux';
-import { RootComponent } from '../../components/Root';
-import { UserActions } from '../../actions';
+import { shallow } from 'enzyme';
+import Root from '../../components/Root';
+import { initialUserState } from '../../reducers/user';
 
-const mockDispatchers = bindActionCreators(UserActions, jest.fn());
+const mockState = {
+  greeting: initialUserState.greeting,
+  name: initialUserState.name,
+};
+const mockDispatchers = {
+  setName: jest.fn(),
+};
+const mockProps = {
+  ...mockState,
+  ...mockDispatchers,
+};
 
 describe('Root Component', () => {
-  it('redners', () => {
-    const tree = render
-      .create(
-        <RootComponent
-          actions={mockDispatchers}
-          greeting='testGreeting'
-          name='testName'
-        />
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+  it('renders', () => {
+    const wrapper = shallow(<Root {...mockProps} />);
+    expect(wrapper.debug()).toMatchSnapshot();
   });
 });
