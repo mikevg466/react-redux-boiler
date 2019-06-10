@@ -5,23 +5,33 @@ const getExpectedState = newState =>
   Object.assign({}, userInitialState, newState);
 
 describe('User Reducer', () => {
-  it('SET_NAME processes correctly', () => {
-    const name = 'testName';
-    const result = userReducer(userInitialState, {
-      type: types.SET_NAME,
-      name,
-    });
-
-    expect(result).toEqual(getExpectedState({ name }));
+  it('has the correct initial state', () => {
+    expect(userReducer(undefined, {})).toEqual(userInitialState);
   });
 
-  it('SET_GREETING processes correctly', () => {
-    const greeting = 'testGreeting';
-    const result = userReducer(userInitialState, {
-      type: types.SET_GREETING,
-      greeting,
-    });
+  describe('SET_NAME', () => {
+    it('returns the correct state', () => {
+      const name = 'testName';
+      const expectedState = getExpectedState({ name });
+      const action = {
+        type: types.SET_NAME,
+        name,
+      };
 
-    expect(result).toEqual(getExpectedState({ greeting }));
+      expect(userReducer(undefined, action)).toEqual(expectedState);
+    });
+  });
+
+  describe('SET_GREETING', () => {
+    it('returns the correct state', () => {
+      const greeting = 'testGreeting';
+      const expectedState = getExpectedState({ greeting });
+      const action = {
+        type: types.SET_GREETING,
+        greeting,
+      };
+
+      expect(userReducer(undefined, action)).toEqual(expectedState);
+    });
   });
 });
